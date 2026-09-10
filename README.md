@@ -228,6 +228,25 @@ Results written to `outputs/benchmark_results.csv`. Covers:
 
 ---
 
+## Termux / Android (بدون Root)
+
+يوفر المشروع إعدادًا منفصلًا لـTermux عبر `setup-termux.sh`. هذا المسار يشغّل محرك GGUF على المعالج CPU فقط، ولا يحتاج إلى Root أو `proot-distro` أو CUDA أو Termux:API. كما أنه لا يثبت حزم التدريب الثقيلة أو أدوات التحكم بسطح المكتب لأنها غير مناسبة لأندرويد.
+
+```bash
+git clone https://github.com/mrx7014/Iris-AI_TERMUX-NATIVE
+cd Iris-AI_TERMUX-NATIVE
+bash setup-termux.sh
+# لتنزيل نماذج Tiny النصية (عدة جيجابايت):
+bash setup-termux.sh --download-models
+./run-termux.sh
+```
+
+بعد التشغيل افتح `http://127.0.0.1:5050` في متصفح الهاتف. يقوم السكربت بإنشاء نسخة احتياطية من `config/iris.conf` باسم `config/iris.conf.desktop-backup`، ثم يضبط الإعدادات على Tiny وCPU وسياق 4096 لتقليل استهلاك الذاكرة. تنزيل نماذج الرؤية اختياري عبر `--with-vision`، وقد يحتاج مساحة إضافية كبيرة.
+
+يفضل استخدام هاتف بذاكرة RAM لا تقل عن 8 GB ومساحة فارغة مناسبة للنماذج. إذا فشل بناء `llama-cpp-python` على إصدار Termux لديك، حدّث Termux وحزم البناء أولًا ثم أعد تشغيل السكربت؛ لا تستخدم `sudo` داخل Termux.
+
+---
+
 ## Full Documentation
 
 All detailed docs live in [`documentations/`](documentations/):
